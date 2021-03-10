@@ -44,17 +44,24 @@ app.get("/json", (req, res) => {
 });
 
 app.get("/uuid", (req, res) => {
-    res.json({
+    res.send({
         uuid :uuid()
     });
     res.end();
 });
 
 app.get("/status/:code",(req,res)=>{
-    let code = req.params.code;
+    const code = Number(req.params.code);
     res.status(code);
+    res.send(`${code} status code`)
     res.end();
 });
 
+app.get('/delay/:id',(req,res)=>{
+    let id = Number(req.params.id);
+    setTimeout(function() {
+        res.send(`delay ${id} seconds`);
+    }, id*1000);
+});
 
 app.listen(PORT, () => console.log(`Run on port : ${PORT}`));
