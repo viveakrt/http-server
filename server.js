@@ -47,6 +47,7 @@ app.get("/uuid", (req, res) => {
     res.send({
         uuid :uuid()
     });
+    res.status(200)
     res.end();
 });
 
@@ -60,8 +61,10 @@ app.get("/status/:code",(req,res)=>{
 app.get('/delay/:id',(req,res)=>{
     let id = Number(req.params.id);
     setTimeout(function() {
+        res.status(200)
         res.send(`delay ${id} seconds`);
     }, id*1000);
+    res.end();
 });
 
 app.listen(PORT, () => console.log(`Run on port : ${PORT}`));
